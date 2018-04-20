@@ -1,0 +1,24 @@
+case "$1" in
+	"m3u8")
+		curl -LNs "$2" | grep -Eom 1 '[^ "|'\''|>]+m3u8[^ "|'\''|<]*' | sed 's/\\//g;s/^\/\//http:\/\//' | grep http
+		;;
+	"dailymotion")
+		curl -LNs www.dailymotion.com/video/$2 | grep -Eo '[^ "|'\'']+m3u8[^ "|'\'']*' | sed 's/\\//g;s/^\/\//http:\/\//' | tail -1
+		;;	
+	"euronews")
+		curl -Ls $(curl -s $2.euronews.com/api/watchlive.json | awk -F'"' '/url/{gsub(/\\/,"");print$(NF-1)}') | awk -F'"' '/primary/{gsub(/\\/,"");print$(NF-1)}'
+		;;
+	"ovva")
+		curl -LNs $(curl -LNs "$2" | awk -F '"' '/ovva-player",/{print$(NF-1)|"base64 -d"}' | awk -F'"' '/balancer/{gsub(/\\/,"");print$8}') | awk '{gsub(/302=/,"");print $0}'
+		;;
+	"youtube")
+		cd /etc/enigma2;python -Bc "from YouTubeVideoUrl import YouTubeVideoUrl;print YouTubeVideoUrl().extract('$(curl -GLNs "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&eventType=live&key=AIzaSyCSDI9_w8ROa1UoE2CNIUdDQnUhNbp9XR4" --data-urlencode "q=$2" | awk -F'"' '/videoId/{print$(NF-1)}')')"
+		;;
+	"gledai")
+		python -B /etc/enigma2/gledai.py $2 $3
+		;;
+	*)
+		echo "Error. No input route"
+		exit 1
+		;;
+esac
