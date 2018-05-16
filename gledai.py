@@ -12,4 +12,4 @@ q.add_header('Host', h)
 q.add_header('Referer', r)
 q.add_header('User-Agent', ua)
 s = re.search(r"file>(.*?)<", urllib2.urlopen(q).read()).group(1).replace('&amp;','&')
-print str(s) + '#Origin=http%3a//bg-gledai.org&Referer=' + r.replace(':','%3a') + '&User-Agent=' + ua
+print str(s) + '#Origin=http%3a//www.bg-gledai.tv&Referer=' + r.replace(':','%3a') + '&User-Agent=' + ua
