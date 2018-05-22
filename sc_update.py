@@ -14,16 +14,16 @@ ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 q = urllib2.Request('http://www.latest-files.com/irdeto-keys.php')
 q.add_header('User-Agent', ua)
 h = urllib2.urlopen(q).read()
-get('I 0604', '04', '060400 04.*?[>\s]([0-9A-F ]+)[<\s]')
-get('I 0604', '06', '060400 06.*?[>\s]([0-9A-F ]+)[<\s]')
+get('I 0604', '04', '060400 04.*?[>\s]([0-9A-F ]+)[<&\s]')
+get('I 0604', '06', '060400 06.*?[>\s]([0-9A-F ]+)[<&\s]')
 
 q = urllib2.Request('http://www.latest-files.com/powervu-keys.php')
 q.add_header('User-Agent', ua)
 h = urllib2.urlopen(q).read()
-get('P 030', '00', '12322 V 27500.*?ECMKey0.*?[>\s]([0-9A-F ]+)[<\s]')
-get('P 030', '01', '12322 V 27500.*?ECMKey1.*?[>\s]([0-9A-F ]+)[<\s]')
-get('P 010', '00', '12418-H-27500.*?(?:Keys: 00|Key0).*?[>\s]([0-9A-F ]+)[<\s]')
-get('P 010', '01', '12418-H-27500.*?(?:Keys: 01|Key1).*?[>\s]([0-9A-F ]+)[<\s]')
+get('P 030', '00', '12322 V 27500.*?ECMKey0.*?[>\s]([0-9A-F ]+)[<&\s]')
+get('P 030', '01', '12322 V 27500.*?ECMKey1.*?[>\s]([0-9A-F ]+)[<&\s]')
+get('P 010', '00', '12418-H-27500.*?(?:Keys: 00|Key0).*?[>\s]([0-9A-F ]+)[<&\s]')
+get('P 010', '01', '12418-H-27500.*?(?:Keys: 01|Key1).*?[>\s]([0-9A-F ]+)[<&\s]')
 
 if list:
 	#print list
