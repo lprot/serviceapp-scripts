@@ -1,4 +1,7 @@
 case "$1" in
+	"hls")
+		echo http://$2
+		;;
 	"m3u8")
 		curl -LNs "$2" | grep -Eom 1 '[^ "|'\''|>]+m3u8[^ "|'\''|<]*' | sed 's/\\//g;s/^\/\//http:\/\//' | grep http | awk '{out=$1 "#Referer=http%3a//'$2'&User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36";print out}'
 		;;
